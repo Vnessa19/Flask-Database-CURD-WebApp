@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css') }}">
+    <title>Routine Categories</title>
+</head>
+<body>  
+        <nav>
+        <h1> Home Gym Hero Database </h1>
+            <ul>
+            <li><a href="{{ url_for('root')  }}">Home</a></li>
+            <li><a href="{{ url_for('users') }}">Users</a></li>
+            <li><a href="{{ url_for('favorite') }}">User Favorite Routine Logs</a></li>
+            <li><a href="{{ url_for('routines') }}">Routines</a></li>
+            <li><a href="{{ url_for('categories') }}">Routine Categories</a></li>
+            <li><a href="{{ url_for('equipment') }}">Equipment</a></li>
+            </ul>
+        </nav>
+<h2>Routine Categories</h2>
+
+<table>
+    <thead>
+    <tr>
+        <!-- Iterate through each key in the first entry to get the
+        column name -->
+        {% for key in categories[0].keys() %}
+
+        <!-- Create a <th> tag with the key inside of it, this will be
+        our header row -->
+        <th>{{ key }}</th>
+
+        <!-- End of this for loop -->
+        {% endfor %}
+    </tr>
+    <tbody>
+
+    <!-- Now, iterate through every person in bsg_people -->
+    {% for person in categories %}
+    <tr>
+        <!-- Then iterate through every key in the current person dictionary -->
+        {% for key in person.keys() %}
+
+        <!-- Create a <td> element with the value of that key in it -->
+        <td>{{person[key]}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </table>
+</body>

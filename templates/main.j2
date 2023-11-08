@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css') }}">
+    <title>Home</title>
+</head>
+<body>
+        <nav>
+        <h1> Home Gym Hero Database </h1>
+            <ul>
+            <li><a href="{{ url_for('root')  }}">Home</a></li>
+            <li><a href="{{ url_for('users') }}">Users</a></li>
+            <li><a href="{{ url_for('favorite') }}">User Favorite Routine Logs</a></li>
+            <li><a href="{{ url_for('routines') }}">Routines</a></li>
+            <li><a href="{{ url_for('categories') }}">Routine Categories</a></li>
+            <li><a href="{{ url_for('equipment') }}">Equipment</a></li>
+            </ul>
+        </nav>
+<h2>  </h2>
+</body>

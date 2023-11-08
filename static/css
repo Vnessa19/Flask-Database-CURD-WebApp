@@ -1,0 +1,29 @@
+nav {
+    background-color: #91c198;
+    padding: auto;
+    
+  }
+
+nav li {
+    display: inline; 
+}
+
+nav a {
+    font-weight: bold;
+    font-size: large;
+  }
+a {
+    font-weight: bold;
+    font-size: large;
+  padding: 7px;}
+table {
+    border-collapse: collapse;
+    border-color: #91c198;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  th,td {
+    text-align:center;
+    border: 1px solid black;
+  }

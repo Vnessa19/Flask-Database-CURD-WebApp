@@ -1,0 +1,6 @@
+/.vscode
+/venv
+.env
+db_credentials.py
+__pycache__
+db_connector.py
