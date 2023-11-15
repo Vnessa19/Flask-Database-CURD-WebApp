@@ -1,6 +1,9 @@
-from flask import Flask, render_template, json
+from flask import Flask, render_template, json, redirect
+from flask_mysqldb import MySQL
+from flask import request
 import os
 import database.db_connector as db
+
 
 
 db_connection = db.connect_to_database()
@@ -9,21 +12,90 @@ db_connection = db.connect_to_database()
 
 app = Flask(__name__)
 
+
+
+mysql = MySQL(app)
+
 # Routes 
 
 @app.route('/')
 def root():
     return render_template("main.j2")
 
-@app.route('/users')
+########## Functions for Users page #################
+@app.route('/users', methods=['POST','GET'])
 def users():
+    if request.method == "GET":
+        query = "SELECT user_id as 'ID', user_email as 'Email', user_password as 'Password', user_name as 'Name', user_birthday as 'Birthday'FROM Users;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        
+        return render_template("users.j2", data=data)
+    
+    if request.method == "POST":
+        if request.form.get("Create_User"):
+            user_email = request.form["email"]
+            user_password = request.form["password"]
+            user_name = request.form["name"]
+            user_birthday = request.form["dob"]
 
-    # Write the query and save it to a variable
-    query = "SELECT user_email as 'Email', user_password as 'Password', user_name as 'Name', user_birthday as 'Birthday'FROM Users;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    return render_template("users.j2", users=results)
+        query = "INSERT INTO Users (user_email, user_password, user_name, user_birthday) VALUES (%s, %s, %s, %s);"
+        cur = mysql.connection.cursor()
+        cur.execute(query,(user_email, user_password, user_name, user_birthday))
+        mysql.connection.commit()
+        return redirect("/users")
 
+@app.route('/search_user', methods=['POST'])
+def search_user():
+        if request.form.get("Search_User"):
+            user_email = request.form["email"]
+        
+        query2 = "SELECT user_id as 'ID', user_email as 'Email', user_password as 'Password', user_name as 'Name', user_birthday as 'Birthday' FROM Users WHERE user_email = %s;"
+        cur = mysql.connection.cursor()
+        cur.execute(query2, (user_email,))
+        data = cur.fetchall()
+        if data:
+            return render_template("founduser.j2", data=data)
+        else:
+            return render_template("founduser.j2", message = 'User not found.')
+
+@app.route('/edit_user/<int:ID>', methods=['POST','GET'])
+def edit_user(ID):
+    if request.method == "GET":
+        query = "SELECT * FROM Users WHERE user_id = '%s';"
+        cur = mysql.connection.cursor()
+        cur.execute(query,(ID,))
+        data=cur.fetchall()
+        print(data)
+        return render_template("edit_user.j2", data=data)
+
+    if request.method == "POST":
+        if request.form.get("Edit_User"):
+            user_email = request.form["email"]
+            user_password = request.form["password"]
+            user_name = request.form["name"]
+            user_birthday = request.form["dob"]
+            user_id = request.form['userID']
+
+        query = "UPDATE Users SET user_email = %s, user_password = %s, user_name = %s, user_birthday = %s WHERE user_id= %s;"
+        cur = mysql.connection.cursor()
+        cur.execute(query,(user_email, user_password, user_name, user_birthday, user_id))
+        mysql.connection.commit()
+        return redirect("/users")
+    
+@app.route('/delete_user/<int:ID>')
+def delete_user(ID):
+    query = "DELETE FROM Users WHERE user_id = '%s';"
+    cur = mysql.connection.cursor()
+    cur.execute(query,(ID,))
+    mysql.connection.commit()
+
+    return redirect("/users")
+    
+#############################################################
+
+########## Functions for User Favorite page #################
 @app.route('/favorite')
 def favorite():
     query = "SELECT user_id as 'User ID', user_name as Name, routine_name as `Favorite Routine Name` FROM Users JOIN Favorited_routine_logs ON Users.user_id = Favorited_routine_logs.uid JOIN Routines ON Favorited_routine_logs.rid = Routines.routine_id ORDER BY user_id;"

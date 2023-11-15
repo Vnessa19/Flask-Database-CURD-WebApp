@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css') }}">
+    <title>Edit user</title>
+</head>
+
+<h1> Edit user</h1>
+<form id="editUser" action="/edit_user/{{data[0].user_id}}" method="POST">
+			
+			<fieldset>
+				<input type="hidden" value="{{data[0].user_id}}" class="form-control" id="userID" name="userID" required>
+				<div>ID: {{data[0].user_id}}</div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" value="{{data[0].user_email}}" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" value="{{data[0].user_password}}" id="password" name="password" required>
+            </div>
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" value="{{data[0].user_name}}" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="dob">Date of Birth:</label>
+                <input type="date" value="{{data[0].user_birthday}}" id="dob" name="dob" required>
+            </div>
+            <div>
+                <input type="submit" value="Save" name="Edit_User">
+            </div>
+        </form>

@@ -27,3 +27,7 @@ table {
     text-align:center;
     border: 1px solid black;
   }
+
+.space {
+    height: 35px; 
+}

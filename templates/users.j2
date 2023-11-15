@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css') }}">
-    <title>Home</title>
+    <title>Users</title>
 </head>
 <body>  
         <nav>
@@ -16,32 +16,83 @@
             </ul>
         </nav>
 <h2> Users </h2>
+<div id="browse">
 <table>
     <thead>
     <tr>
         <!-- Iterate through each key in the first entry to get the
         column name -->
-        {% for key in users[0].keys() %}
+        {% for key in data[0].keys() %}
 
         <!-- Create a <th> tag with the key inside of it, this will be
         our header row -->
         <th>{{ key }}</th>
-
+        
         <!-- End of this for loop -->
         {% endfor %}
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     <tbody>
 
     <!-- Now, iterate through every person in bsg_people -->
-    {% for person in users %}
+    {% for person in data %}
     <tr>
         <!-- Then iterate through every key in the current person dictionary -->
         {% for key in person.keys() %}
 
         <!-- Create a <td> element with the value of that key in it -->
         <td>{{person[key]}}</td>
+        
+        
         {% endfor %}
+        <td><a href="edit_user/{{person.get('ID')}}">Edit</a></td>
+        <td><a href="delete_user/{{person.get('ID')}}">Detele</a></td>
+        
     </tr>
     {% endfor %}
     </table>
+</div>
+<div class="space"></div>
+
+<div>
+<h3>Search a user</h3>
+        <form id="searchUser" action="/search_user" method="post">
+            <label>User's Email</label>
+            <input type="email" id="email" name="email" required placeholder="Enter user's email">
+            <input type="submit" value="Search User" name="Search_User">
+        </form>
+
+</div>
+
+<div class="space"></div>
+<div id="insert">
+		<!-- form to add data in users-->
+		<form id="insertUser" action="/users" method="post">
+			<legend><strong>Create a new user</strong></legend>
+			<fieldset>
+			<form>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div>
+                <input type="submit" value="Create User" name="Create_User">
+            </div>
+        </form>
+	</div><!--edit-->
+
+
 </body>
