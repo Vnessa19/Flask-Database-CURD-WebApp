@@ -22,7 +22,7 @@
     <tr>
         <!-- Iterate through each key in the first entry to get the
         column name -->
-        {% for key in categories[0].keys() %}
+        {% for key in data[0].keys() %}
 
         <!-- Create a <th> tag with the key inside of it, this will be
         our header row -->
@@ -34,7 +34,7 @@
     <tbody>
 
     <!-- Now, iterate through every person in bsg_people -->
-    {% for person in categories %}
+    {% for person in data %}
     <tr>
         <!-- Then iterate through every key in the current person dictionary -->
         {% for key in person.keys() %}
@@ -45,4 +45,17 @@
     </tr>
     {% endfor %}
     </table>
+
+    <div class="space"></div>
+    <h3>Create a category</h3>
+        <form id="insertCategory" action="/categories" method="post">
+            <div>
+                <label for="category">Enter category name:</label>
+                <input type="text" id="category" name="category" required>
+            </div>
+            <div>
+                <input type="submit" value="Create Category" name="Create_Category">
+            </div>
+            
+        </form>
 </body>
