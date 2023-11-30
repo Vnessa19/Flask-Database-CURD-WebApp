@@ -190,6 +190,15 @@ def routines():
         
         return render_template("routines.j2", data=data)
 
+#### Delete operation for Routines
+@app.route('/delete_routine/<int:ID>')
+def delete_routine(ID):
+    query = "DELETE FROM Routines WHERE routine_id = '%s';"
+    cur = mysql.connection.cursor()
+    cur.execute(query,(ID,))
+    mysql.connection.commit()
+
+    return redirect("/routines")
 #############################################################################################
 
 ########## Functions for Routine_categories page, create/read ###############################
