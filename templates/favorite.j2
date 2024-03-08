@@ -43,19 +43,24 @@
         <!-- Create a <td> element with the value of that key in it -->
         <td>{{favorite[key]}}</td>
         {% endfor %}
-        <td><a href="edit_log/{{favorite.get('ID')}}">Edit</a></td>
-        <td><a href="delete_log/{{favorite.get('ID')}}">Delete</a></td>
+        <td><a href="edit_log/{{favorite.get('ID')}}"><button class="button">Edit</button></a></td>
+        <td><a href="delete_log/{{favorite.get('ID')}}"><button class="button">Delete</button></a></td>
     </tr>
     {% endfor %}
     </table>
 <div class="space"></div>
-    <h3>Create a favorite log</h3>
+    <legend><strong>Create a new log</strong></legend>
+	<fieldset class="fieldset">
         <form id="insertLog" action="/favorite" method="post">
-            <div>
-                <label for="email">Enter user email:</label>
-                <input type="email" id="email" name="email" required>
+            <div class="form">
+                <label for="email">Find your account</label>
+                <select id="email" name="email">
+                {% for email in emails %}
+                    <option value="{{ email.get('user_email') }}">{{ email.get('user_email') }}</option>
+                {% endfor %}
+                </select>
             </div>
-            <div>
+            <div class="form">
                 <label for="routine_name">Pick a routine</label>
                 <select id="routine_name" name="routine_name">
                 {% for routine in routines %}
@@ -63,8 +68,8 @@
                 {% endfor %}
                 </select>
             </div>
-            <div>
-                <input type="submit" value="Create Log" name="Create_Log">
+            <div class="form">
+                <input type="submit" value="Create Log" name="Create_Log" class="button">
             </div>
             <h1> {{ message }}</h1>
         </form>

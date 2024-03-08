@@ -17,7 +17,7 @@
 <h1> Edit user</h1>
 <form id="editUser" action="/edit_user/{{data[0].user_id}}" method="POST">
 			
-			<fieldset>
+			<fieldset class="fieldset">
 				<input type="hidden" value="{{data[0].user_id}}" class="form-control" id="userID" name="userID" required>
 				<div>ID: {{data[0].user_id}}</div>
             <div>
@@ -37,6 +37,6 @@
                 <input type="date" value="{{data[0].user_birthday}}" id="dob" name="dob" required>
             </div>
             <div>
-                <input type="submit" value="Save" name="Edit_User">
+                <input type="submit" value="Save" name="Edit_User" class="button">
             </div>
         </form>

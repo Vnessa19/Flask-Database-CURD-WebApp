@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css') }}">
-    <title>Routines</title>
+    <title>Edit a routine</title>
 </head>
 <body>  
         <nav>
@@ -15,62 +15,30 @@
             <li><a href="{{ url_for('equipment') }}">Equipment</a></li>
             </ul>
         </nav>
-<h2>Routines</h2>
-<table>
-    <thead>
-    <tr>
-        <!-- Iterate through each key in the first entry to get the
-        column name -->
-        {% for key in data[0].keys() %}
 
-        <!-- Create a <th> tag with the key inside of it, this will be
-        our header row -->
-        <th>{{ key }}</th>
-
-        <!-- End of this for loop -->
-        {% endfor %}
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    <tbody>
-
-    <!-- Now, iterate through every person in  -->
-    {% for person in data %}
-    <tr>
-        <!-- Then iterate through every key in the current person dictionary -->
-        {% for key in person.keys() %}
-            {% if key == 'Video Link' %}
-                <td><a href="{{person[key]}}"> Video </a> </td>
-            {% else %}
-                <td>{{person[key]}}</td>
-            {% endif %}
-        {% endfor %}
-        <td><a href="edit_routine/{{person.get('ID')}}"><button class="button">Edit</button></a></td>
-        <td><a href="delete_routine/{{person.get('ID')}}"><button class="button">Delete</button></a></td>
-    </tr>
-
-    {% endfor %}
-    </table>
-
-    <div class="space"></div>
-    <legend><strong>Create a new routine</strong></legend>
+<div class="space"></div>
+    <legend><strong>Edit routine</strong></legend>
 	<fieldset class="fieldset">
-    <form id="insertRoutine" action="/routines" method="post">
+    <form id="editRoutine" action="/edit_routine/{{data[0].routine_id}}" method="POST">
+        <div class="form">
+				<input type="hidden" value="{{data[0].routine_id}}" class="form-control" id="routineID" name="routineID" required>
+				ID: {{data[0].routine_id}}
+            </div>
         <div class="form">
             <label for="routine">Enter routine name:</label>
-            <input type="text" id="routine" name="routine" required>
+            <input type="text" value="{{data[0].routine_name}}" id="routine" name="routine" required>
         </div>
         <div class="form">
                 <label for="description">Description:</label>
-                <input type="description" id="description" name="description" required>
+                <input type="description" value="{{data[0].description}}"  id="description" name="description" required>
         </div>
         <div class="form">
                 <label for="duration">Duration:</label>
-                <input type="duration" id="duration" name="duration" required>
+                <input type="duration" value="{{data[0].Duration}}" id="duration" name="duration" required>
         </div>
         <div class="form">
                 <label for="video">Video Link:</label>
-                <input type="video" id="video" name="video" required>
+                <input type="video" value="{{data[0].video_link}}" id="video" name="video" required>
         </div>
         <div class="form">
             <label for="equipment">Select Equipment:</label>
@@ -90,6 +58,4 @@
             </select>
         </div>
 
-        <button type="submit" value="Create_Routine" name="Create_Routine" class="button">Create Routine</button>
-    </form>
-</body>
+        <button type="submit" value="Edit_Routine" name="Edit_Routine" class="button">Save</button>

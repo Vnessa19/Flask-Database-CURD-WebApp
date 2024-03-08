@@ -46,14 +46,15 @@
     </table>
 
     <div class="space"></div>
-    <h3>Create a category</h3>
+    <legend><strong>Create a new user</strong></legend>
+	<fieldset class="fieldset">
         <form id="insertEquipment" action="/equipment" method="post">
-            <div>
+            <div class="form">
                 <label for="category">Enter equipment name:</label>
                 <input type="text" id="equipment" name="equipment" required>
             </div>
-            <div>
-                <input type="submit" value="Create Equipment" name="Create_Equipment">
+            <div class="form">
+                <input type="submit" value="Create Equipment" name="Create_Equipment" class="button">
             </div>
             
         </form>

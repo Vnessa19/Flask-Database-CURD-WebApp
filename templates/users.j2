@@ -46,8 +46,8 @@
         
         
         {% endfor %}
-        <td><a href="edit_user/{{person.get('ID')}}">Edit</a></td>
-        <td><a href="delete_user/{{person.get('ID')}}">Delete</a></td>
+        <td><a href="edit_user/{{person.get('ID')}}"><button class="button">Edit</button></a></td>
+        <td><a href="delete_user/{{person.get('ID')}}"><button class="button">Delete</button></a></td>
         
     </tr>
     {% endfor %}
@@ -56,11 +56,12 @@
 <div class="space"></div>
 
 <div>
-<h3>Search a user</h3>
+<legend><strong>Search a user</strong></legend>
+<fieldset class="fieldset">
         <form id="searchUser" action="/search_user" method="post">
             <label>User's Email</label>
             <input type="email" id="email" name="email" required placeholder="Enter user's email">
-            <input type="submit" value="Search User" name="Search_User">
+            <input type="submit" value="Search User" name="Search_User" class="button">
         </form>
 
 </div>
@@ -70,29 +71,27 @@
 		<!-- form to add data in users-->
 		<form id="insertUser" action="/users" method="post">
 			<legend><strong>Create a new user</strong></legend>
-			<fieldset>
-			<form>
-            <div>
+			<fieldset class="fieldset">
+            <div class="form">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            <div>
+            <div class="form">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <div>
+            <div class="form">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
             </div>
-            <div>
+            <div class="form">
                 <label for="dob">Date of Birth:</label>
                 <input type="date" id="dob" name="dob" required>
             </div>
-            <div>
-                <input type="submit" value="Create User" name="Create_User">
+            <div class="form">
+                <input type="submit" value="Create User" name="Create_User" class="button">
             </div>
         </form>
 	</div><!--edit-->
-
 
 </body>

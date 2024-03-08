@@ -33,3 +33,24 @@ table {
 .space {
     height: 35px; 
 }
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #91c198;
+}
+.fieldset {
+  padding: 15px;
+  border: 2px solid #91c198; 
+  border-radius: 5px; 
+}
+.form {
+  padding-bottom: 8px;
+}
+form input {
+  width: 300px; 
+}

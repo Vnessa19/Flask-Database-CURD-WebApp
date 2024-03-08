@@ -17,14 +17,16 @@
 <h1> Edit Log</h1>
 <form id="editLog" action="/edit_log/{{data[0].log_id}}" method="POST">
 			
-			<fieldset>
+			<fieldset class="fieldset">
+            <div class="form">
 				<input type="hidden" value="{{data[0].log_id}}" class="form-control" id="logID" name="logID" required>
-				<div>ID: {{data[0].log_id}}</div>
-            <div>
+				ID: {{data[0].log_id}}
+            </div>
+            <div class="form">
                 <label for="email">Email:</label>
                 <input type="email" value="{{data[0].user_email}}" id="email" name="email" required>
             </div>
-            <div>
+            <div class="form">
                 <label for="routine_name">Routine</label>
                 <select id="routine_name" name="routine_name">
                 {% for routine in routines %}
@@ -32,7 +34,7 @@
                 {% endfor %}
                 </select>
             </div>
-            <div>
-                <input type="submit" value="Save" name="Edit_Log">
+            <div class="form">
+                <input type="submit" value="Save" name="Edit_Log" class="button">
             </div>
         </form>
